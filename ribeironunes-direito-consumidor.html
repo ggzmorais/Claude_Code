@@ -1,0 +1,948 @@
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  RIBEIRO NUNES ADVOGADOS — Landing Page Direito do Consumidor
+  ║
+  ║  COMO USAR NO WORDPRESS + ELEMENTOR:
+  ║  1. Crie uma nova página no WordPress
+  ║  2. Abra com o Elementor
+  ║  3. No canto superior → clique em "..." → Propriedades da Página
+  ║  4. Em "Modelo de Página" selecione "Elementor Canvas" (remove header/footer)
+  ║  5. Adicione UM widget "HTML" na página
+  ║  6. Cole TODO o conteúdo abaixo dentro do widget
+  ║  7. SUBSTITUA os 3 pontos marcados com ⚠️ antes de publicar:
+  ║     • SEUNUMERO → número do WhatsApp sem traços (ex: 5512999998888)
+  ║     • Depoimentos → substitua pelos reais do Google se preferir
+  ║
+  ║  SEO (configure no Yoast SEO ou RankMath da página):
+  ║  • Título: Direito do Consumidor em São José dos Campos | Ribeiro Nunes Advogados
+  ║  • Descrição: Empresa te prejudicou? Avalie seu caso gratuitamente com a Ribeiro Nunes.
+  ║    +10 anos de experiência, atendimento 100% online, resposta em até 1 hora.
+  ║  • URL sugerida: /direito-do-consumidor/ (ou manter /servicos/direito-consumidor/)
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+
+<style>
+/* ===== RESET & BASE ===== */
+.rn-lp *, .rn-lp *::before, .rn-lp *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.rn-lp {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: #1A1A2E;
+  width: 100%;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --navy:      #0F2542;
+  --petrol:    #1B5B7A;
+  --blue-vivo: #4A9EFF;
+  --blue-pale: #DCE5EB;
+  --cream:     #E8D8A8;
+  --green-wa:  #25D366;
+  --white:     #FFFFFF;
+  --gray-soft: #F5F7FA;
+  --text-mid:  #4A5568;
+  --radius:    12px;
+  --shadow:    0 4px 24px rgba(15,37,66,0.12);
+}
+
+/* ===== WHATSAPP FLUTUANTE ===== */
+.rn-wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  background: var(--green-wa);
+  color: #fff;
+  border-radius: 50px;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+  transition: transform .2s, box-shadow .2s;
+  animation: rn-pulse 2.5s ease-in-out infinite;
+}
+.rn-wa-float:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(37,211,102,0.55);
+}
+.rn-wa-float svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+@keyframes rn-pulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.45); }
+  50%      { box-shadow: 0 4px 36px rgba(37,211,102,0.70); }
+}
+
+/* ===== BOTÃO PRINCIPAL WA ===== */
+.rn-btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--green-wa);
+  color: #fff;
+  font-weight: 700;
+  font-size: 17px;
+  padding: 18px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+  cursor: pointer;
+}
+.rn-btn-wa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,211,102,0.50);
+}
+.rn-btn-wa svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+/* ===== TIPOGRAFIA HELPER ===== */
+.rn-tag {
+  display: inline-block;
+  background: var(--blue-pale);
+  color: var(--petrol);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+.rn-tag--light {
+  background: rgba(232,216,168,0.18);
+  color: var(--cream);
+}
+.rn-title {
+  font-size: clamp(22px, 4vw, 36px);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.25;
+  max-width: 620px;
+  margin: 0 auto 14px;
+}
+.rn-title--white { color: var(--white); }
+.rn-sub {
+  font-size: 17px;
+  color: var(--text-mid);
+  max-width: 560px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+.rn-sub--white { color: rgba(255,255,255,0.75); }
+
+/* ===== ESTRELAS ===== */
+.rn-stars { color: #FFD700; letter-spacing: 2px; }
+
+/* =======================================
+   SEÇÃO 1 — HERO
+======================================= */
+.rn-hero {
+  background: var(--navy);
+  padding: 72px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.rn-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 72% 0%, rgba(74,158,255,0.13) 0%, transparent 62%);
+  pointer-events: none;
+}
+
+.rn-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(232,216,168,0.13);
+  border: 1px solid rgba(232,216,168,0.30);
+  border-radius: 50px;
+  padding: 7px 18px;
+  color: var(--cream);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.rn-hero h1 {
+  font-size: clamp(28px, 5.5vw, 52px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.18;
+  max-width: 780px;
+  margin: 0 auto 22px;
+}
+.rn-hero h1 em {
+  font-style: normal;
+  color: var(--cream);
+}
+.rn-hero-sub {
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: rgba(255,255,255,0.78);
+  max-width: 560px;
+  margin: 0 auto 38px;
+  line-height: 1.65;
+}
+.rn-hero-note {
+  margin-top: 18px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.50);
+  letter-spacing: 0.3px;
+}
+
+.rn-trust-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  margin-top: 56px;
+  flex-wrap: wrap;
+}
+.rn-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.82);
+  font-size: 14px;
+}
+.rn-trust-item strong {
+  color: var(--cream);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+}
+.rn-trust-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* =======================================
+   SEÇÃO 2 — CASOS QUE ATENDEMOS
+======================================= */
+.rn-cases {
+  background: var(--gray-soft);
+  padding: 72px 24px;
+  text-align: center;
+}
+.rn-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+  max-width: 940px;
+  margin: 0 auto;
+}
+.rn-case-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 26px 20px;
+  text-align: left;
+  border-left: 4px solid var(--blue-vivo);
+  box-shadow: 0 2px 12px rgba(15,37,66,0.06);
+  transition: transform .2s, box-shadow .2s;
+}
+.rn-case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.rn-case-icon { font-size: 30px; margin-bottom: 12px; display: block; }
+.rn-case-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 7px;
+  line-height: 1.3;
+}
+.rn-case-card p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.55;
+}
+
+/* =======================================
+   SEÇÃO 3 — COMO FUNCIONA
+======================================= */
+.rn-how {
+  background: var(--navy);
+  padding: 80px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.rn-how::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 100%, rgba(74,158,255,0.10) 0%, transparent 55%);
+  pointer-events: none;
+}
+.rn-steps {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 840px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+.rn-step { flex: 1; min-width: 210px; padding: 0 16px; position: relative; text-align: center; }
+.rn-step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -6px;
+  top: 24px;
+  color: rgba(232,216,168,0.5);
+  font-size: 22px;
+}
+.rn-step-num {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--navy);
+  font-size: 24px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+.rn-step h3 {
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.rn-step p {
+  color: rgba(255,255,255,0.68);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =======================================
+   SEÇÃO 4 — DIFERENCIAIS
+======================================= */
+.rn-diff {
+  background: var(--white);
+  padding: 80px 24px;
+  text-align: center;
+}
+.rn-diff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  max-width: 940px;
+  margin: 0 auto;
+}
+.rn-diff-card {
+  background: var(--gray-soft);
+  border-radius: var(--radius);
+  padding: 32px 26px;
+  text-align: left;
+  transition: transform .2s;
+}
+.rn-diff-card:hover { transform: translateY(-3px); }
+.rn-diff-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+.rn-diff-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.rn-diff-card p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+/* =======================================
+   SEÇÃO 5 — PROVA SOCIAL
+======================================= */
+.rn-proof {
+  background: var(--blue-pale);
+  padding: 80px 24px;
+  text-align: center;
+}
+.rn-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 20px;
+  max-width: 940px;
+  margin: 0 auto 44px;
+}
+.rn-review {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  text-align: left;
+  box-shadow: 0 2px 12px rgba(15,37,66,0.06);
+}
+.rn-review-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.rn-review-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--cream);
+  font-weight: 800;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.rn-review-name { font-weight: 700; font-size: 15px; color: var(--navy); }
+.rn-review p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.rn-google-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--white);
+  border-radius: 50px;
+  padding: 14px 28px;
+  box-shadow: 0 2px 12px rgba(15,37,66,0.08);
+}
+.rn-google-badge span { font-size: 16px; font-weight: 700; color: var(--navy); }
+.rn-google-badge small { font-size: 13px; color: var(--text-mid); }
+
+/* =======================================
+   SEÇÃO 6 — FAQ
+======================================= */
+.rn-faq {
+  background: var(--white);
+  padding: 80px 24px;
+}
+.rn-faq-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+details.rn-faq-item {
+  border-bottom: 1px solid var(--blue-pale);
+}
+details.rn-faq-item:first-of-type {
+  border-top: 1px solid var(--blue-pale);
+}
+.rn-faq-q {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  list-style: none;
+  padding: 22px 0;
+  user-select: none;
+}
+.rn-faq-q::-webkit-details-marker { display: none; }
+.rn-faq-q::after {
+  content: '+';
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--blue-vivo);
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+details[open] > .rn-faq-q::after { content: '−'; }
+.rn-faq-a {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.75;
+  padding-bottom: 22px;
+}
+
+/* =======================================
+   SEÇÃO 7 — CTA FINAL
+======================================= */
+.rn-cta-final {
+  background: var(--navy);
+  padding: 88px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.rn-cta-final::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 100%, rgba(74,158,255,0.10) 0%, transparent 60%);
+}
+.rn-cta-final h2 {
+  font-size: clamp(24px, 4.5vw, 44px);
+  font-weight: 800;
+  color: var(--white);
+  max-width: 640px;
+  margin: 0 auto 18px;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+.rn-cta-final h2 em { font-style: normal; color: var(--cream); }
+.rn-cta-final p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.72);
+  max-width: 500px;
+  margin: 0 auto 40px;
+  line-height: 1.65;
+  position: relative;
+  z-index: 1;
+}
+.rn-cta-final .rn-btn-wa { position: relative; z-index: 1; }
+.rn-cta-note {
+  margin-top: 22px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  position: relative;
+  z-index: 1;
+}
+
+/* =======================================
+   RESPONSIVO
+======================================= */
+@media (max-width: 640px) {
+  .rn-step:not(:last-child)::after { display: none; }
+  .rn-steps { flex-direction: column; align-items: center; gap: 36px; }
+  .rn-trust-divider { display: none; }
+  .rn-trust-row { gap: 18px; }
+  /* Botão flutuante vira só ícone no mobile */
+  .rn-wa-float .rn-wa-txt { display: none; }
+  .rn-wa-float { padding: 16px; border-radius: 50%; }
+}
+</style>
+
+<!-- ⚠️ SUBSTITUA "SEUNUMERO" pelo número do WhatsApp (ex: 5512999998888) em TODOS os links abaixo -->
+
+<div class="rn-lp">
+
+  <!-- ===== BOTÃO FLUTUANTE ===== -->
+  <a href="https://wa.me/SEUNUMERO?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20avalia%C3%A7%C3%A3o%20gratuita%20sobre%20meu%20caso%20de%20direito%20do%20consumidor."
+     class="rn-wa-float" target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.849L.057 23.571c-.072.267.169.511.437.437l5.801-1.484A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.825 9.825 0 01-5.001-1.365l-.357-.213-3.712.95.98-3.626-.233-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+    </svg>
+    <span class="rn-wa-txt">Falar com advogado</span>
+  </a>
+
+  <!-- =======================================
+       1. HERO
+  ======================================= -->
+  <section class="rn-hero">
+    <div class="rn-hero-badge">⚖️ Direito do Consumidor</div>
+
+    <h1>
+      Empresa te prejudicou?<br>
+      <em>Você tem direitos —<br>e nós lutamos por eles.</em>
+    </h1>
+
+    <p class="rn-hero-sub">
+      Avalie seu caso gratuitamente com um advogado de verdade.
+      Atendimento 100% online, em todo o Brasil, sem burocracia.
+    </p>
+
+    <a href="https://wa.me/SEUNUMERO?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20avalia%C3%A7%C3%A3o%20gratuita%20sobre%20meu%20caso%20de%20direito%20do%20consumidor."
+       class="rn-btn-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.849L.057 23.571c-.072.267.169.511.437.437l5.801-1.484A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.825 9.825 0 01-5.001-1.365l-.357-.213-3.712.95.98-3.626-.233-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+      </svg>
+      Avaliar meu caso gratuitamente
+    </a>
+
+    <p class="rn-hero-note">📲 Resposta em até 1 hora &nbsp;·&nbsp; Sem compromisso &nbsp;·&nbsp; Total confidencialidade</p>
+
+    <div class="rn-trust-row">
+      <div class="rn-trust-item">
+        <span class="rn-stars" style="font-size:18px;">★★★★★</span>
+        <strong>5,0</strong>
+        <span>no Google</span>
+      </div>
+      <div class="rn-trust-divider"></div>
+      <div class="rn-trust-item">
+        <strong>+10</strong>
+        <span>anos de experiência</span>
+      </div>
+      <div class="rn-trust-divider"></div>
+      <div class="rn-trust-item">
+        <strong>100%</strong>
+        <span>online</span>
+      </div>
+      <div class="rn-trust-divider"></div>
+      <div class="rn-trust-item">
+        <strong>Nacional</strong>
+        <span>em todo o Brasil</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================
+       2. CASOS QUE ATENDEMOS
+  ======================================= -->
+  <section class="rn-cases">
+    <div class="rn-tag">Você se identifica?</div>
+    <h2 class="rn-title">Situações em que podemos ajudar</h2>
+    <p class="rn-sub">
+      Se você passou por alguma dessas situações, é provável que seus direitos tenham sido violados.
+      Fale com a gente e descubra.
+    </p>
+
+    <div class="rn-cases-grid">
+      <div class="rn-case-card">
+        <span class="rn-case-icon">🏥</span>
+        <h3>Plano de saúde negou cobertura</h3>
+        <p>Procedimento, cirurgia, internação ou medicamento recusado sem justificativa válida.</p>
+      </div>
+      <div class="rn-case-card">
+        <span class="rn-case-icon">🏦</span>
+        <h3>Cobranças abusivas</h3>
+        <p>Tarifas bancárias indevidas, encargos ilegais em cartão, consignado ou dívida que não reconhece.</p>
+      </div>
+      <div class="rn-case-card">
+        <span class="rn-case-icon">✈️</span>
+        <h3>Companhia aérea</h3>
+        <p>Voo cancelado, atraso, extravio ou dano em bagagem sem solução adequada da empresa.</p>
+      </div>
+      <div class="rn-case-card">
+        <span class="rn-case-icon">🏗️</span>
+        <h3>Construtora ou imóvel</h3>
+        <p>Atraso na entrega, vícios de construção, vício oculto ou propaganda enganosa.</p>
+      </div>
+      <div class="rn-case-card">
+        <span class="rn-case-icon">📦</span>
+        <h3>Produto com defeito</h3>
+        <p>Produto chegou danificado, parou de funcionar logo após a compra e a empresa se recusa a trocar.</p>
+      </div>
+      <div class="rn-case-card">
+        <span class="rn-case-icon">📵</span>
+        <h3>Serviço não prestado</h3>
+        <p>Pagou por um serviço, não foi entregue ou foi diferente do prometido e a empresa não reembolsa.</p>
+      </div>
+      <div class="rn-case-card">
+        <span class="rn-case-icon">⚠️</span>
+        <h3>Negativação indevida</h3>
+        <p>Nome no SPC/Serasa por uma dívida que você não reconhece ou que já foi quitada.</p>
+      </div>
+      <div class="rn-case-card">
+        <span class="rn-case-icon">📣</span>
+        <h3>Publicidade enganosa</h3>
+        <p>Comprou com base em uma oferta anunciada que não foi cumprida pela empresa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================
+       3. COMO FUNCIONA
+  ======================================= -->
+  <section class="rn-how">
+    <div class="rn-tag rn-tag--light">Simples e sem burocracia</div>
+    <h2 class="rn-title rn-title--white">Como funciona o atendimento</h2>
+    <p class="rn-sub rn-sub--white">
+      Tudo online, sem precisar sair de casa. Sem juridiquês, sem papelada presencial.
+    </p>
+
+    <div class="rn-steps">
+      <div class="rn-step">
+        <div class="rn-step-num">1</div>
+        <h3>Conta seu caso</h3>
+        <p>Pelo WhatsApp, descreve o que aconteceu. Simples assim — nenhum formulário complicado.</p>
+      </div>
+      <div class="rn-step">
+        <div class="rn-step-num">2</div>
+        <h3>Análise gratuita</h3>
+        <p>Em até 1 hora, um advogado avalia a situação, explica seus direitos em linguagem simples e indica o melhor caminho.</p>
+      </div>
+      <div class="rn-step">
+        <div class="rn-step-num">3</div>
+        <h3>Atuamos pelo seu direito</h3>
+        <p>Se houver caso, cuidamos de tudo: documentação, petições e acompanhamento — você assina digitalmente e aguarda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================
+       4. DIFERENCIAIS
+  ======================================= -->
+  <section class="rn-diff">
+    <div class="rn-tag">Por que a Ribeiro Nunes</div>
+    <h2 class="rn-title">O que nos diferencia</h2>
+    <p class="rn-sub">
+      Comprometimento real com cada cliente — não somos um call center jurídico.
+    </p>
+
+    <div class="rn-diff-grid">
+      <div class="rn-diff-card">
+        <div class="rn-diff-icon">⚡</div>
+        <h3>Resposta em até 1 hora</h3>
+        <p>Você fala com um advogado de verdade — não um robô nem uma secretária. Retorno rápido, direto, com quem entende do caso.</p>
+      </div>
+      <div class="rn-diff-card">
+        <div class="rn-diff-icon">🌐</div>
+        <h3>100% online, em todo o Brasil</h3>
+        <p>Atendemos de qualquer estado. Documentação digital, reuniões por vídeo, assinaturas online. Sem precisar ir ao escritório.</p>
+      </div>
+      <div class="rn-diff-card">
+        <div class="rn-diff-icon">🤝</div>
+        <h3>Linguagem simples, sem juridiquês</h3>
+        <p>Você entende cada passo do seu caso. Nada de termos técnicos confusos — só clareza e transparência do início ao fim.</p>
+      </div>
+      <div class="rn-diff-card">
+        <div class="rn-diff-icon">⭐</div>
+        <h3>+10 anos e 5 estrelas no Google</h3>
+        <p>Histórico sólido em Direito do Consumidor. Nota 5,0 com mais de 20 avaliações reais de clientes atendidos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================
+       5. PROVA SOCIAL
+  ======================================= -->
+  <section class="rn-proof">
+    <div class="rn-tag">O que dizem nossos clientes</div>
+    <h2 class="rn-title">Avaliações reais no Google</h2>
+    <p class="rn-sub">
+      Mais de 20 clientes avaliaram nossa atuação. Veja o que eles dizem.
+    </p>
+
+    <!-- ⚠️ SUBSTITUA pelos depoimentos reais do seu Google Meu Negócio -->
+    <div class="rn-reviews-grid">
+      <div class="rn-review">
+        <div class="rn-review-header">
+          <div class="rn-review-avatar">M</div>
+          <div>
+            <div class="rn-review-name">Maria S.</div>
+            <div class="rn-stars" style="font-size:13px;">★★★★★</div>
+          </div>
+        </div>
+        <p>"Profissionalismo e atenção do início ao fim. Me explicaram tudo com clareza e resolveram meu problema com o plano de saúde rapidamente. Recomendo muito!"</p>
+      </div>
+
+      <div class="rn-review">
+        <div class="rn-review-header">
+          <div class="rn-review-avatar">R</div>
+          <div>
+            <div class="rn-review-name">Roberto A.</div>
+            <div class="rn-stars" style="font-size:13px;">★★★★★</div>
+          </div>
+        </div>
+        <p>"Fui muito bem atendido. A equipe é atenciosa, explica tudo de forma simples e age com rapidez. Consegui resolver uma situação que parecia sem saída."</p>
+      </div>
+
+      <div class="rn-review">
+        <div class="rn-review-header">
+          <div class="rn-review-avatar">C</div>
+          <div>
+            <div class="rn-review-name">Carla M.</div>
+            <div class="rn-stars" style="font-size:13px;">★★★★★</div>
+          </div>
+        </div>
+        <p>"Atendimento excelente, humano e eficiente. Me senti segura em cada etapa e o resultado foi além do que eu esperava. Equipe incrível!"</p>
+      </div>
+    </div>
+
+    <div class="rn-google-badge">
+      <span class="rn-stars" style="font-size:20px;">★★★★★</span>
+      <div>
+        <span>5,0 no Google</span><br>
+        <small>+20 avaliações verificadas</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================
+       6. FAQ
+  ======================================= -->
+  <section class="rn-faq">
+    <div style="text-align:center; margin-bottom:44px;">
+      <div class="rn-tag">Dúvidas frequentes</div>
+      <h2 class="rn-title">Perguntas que recebemos toda semana</h2>
+    </div>
+
+    <div class="rn-faq-inner">
+
+      <details class="rn-faq-item">
+        <summary class="rn-faq-q">Preciso ir pessoalmente ao escritório?</summary>
+        <div class="rn-faq-a">
+          Não. Todo o atendimento é feito de forma 100% remota. Você envia os documentos digitalmente,
+          acompanha o caso online e não precisa comparecer presencialmente em nenhuma etapa.
+          Atendemos clientes em todo o território nacional.
+        </div>
+      </details>
+
+      <details class="rn-faq-item">
+        <summary class="rn-faq-q">A avaliação inicial é realmente gratuita?</summary>
+        <div class="rn-faq-a">
+          Sim. Você nos conta o que aconteceu pelo WhatsApp sem nenhum custo. Analisamos a situação,
+          explicamos seus direitos e indicamos o melhor caminho. Só há honorários advocatícios
+          se você decidir nos contratar para representá-lo.
+        </div>
+      </details>
+
+      <details class="rn-faq-item">
+        <summary class="rn-faq-q">Quanto tempo leva para resolver meu caso?</summary>
+        <div class="rn-faq-a">
+          Depende do tipo de caso e da postura da empresa. Muitas situações são resolvidas por meio
+          de acordos extrajudiciais em poucas semanas. Casos que vão à Justiça têm um prazo mais
+          variável, mas mantemos você informado em cada etapa — sem sumir com o processo.
+        </div>
+      </details>
+
+      <details class="rn-faq-item">
+        <summary class="rn-faq-q">Vocês atendem em qual estado?</summary>
+        <div class="rn-faq-a">
+          Atendemos em todo o Brasil. Nossa sede fica em São José dos Campos (SP),
+          mas como o atendimento é 100% online, não há restrição de localidade para a maioria
+          dos casos de direito do consumidor.
+        </div>
+      </details>
+
+      <details class="rn-faq-item">
+        <summary class="rn-faq-q">Vocês atuam contra grandes empresas (bancos, planos de saúde, aéreas)?</summary>
+        <div class="rn-faq-a">
+          Sim. Temos experiência em casos contra bancos, operadoras de plano de saúde,
+          companhias aéreas, construtoras e grandes varejistas. O porte da empresa
+          não limita os seus direitos como consumidor.
+        </div>
+      </details>
+
+      <details class="rn-faq-item">
+        <summary class="rn-faq-q">Meu caso parece pequeno. Vale a pena buscar um advogado?</summary>
+        <div class="rn-faq-a">
+          Muitos casos de consumidor envolvem indenização por danos morais além do valor material,
+          o que pode ampliar consideravelmente o resultado. O melhor caminho é nos contar o que
+          aconteceu — avaliamos gratuitamente e te dizemos com honestidade se vale seguir em frente.
+        </div>
+      </details>
+
+      <details class="rn-faq-item">
+        <summary class="rn-faq-q">Preciso ter todos os documentos antes de entrar em contato?</summary>
+        <div class="rn-faq-a">
+          Não é necessário ter tudo reunido para dar o primeiro passo. Nos conta o que aconteceu
+          e orientamos quais documentos serão relevantes para o seu caso específico.
+          Começar não precisa ser complicado.
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- =======================================
+       7. CTA FINAL
+  ======================================= -->
+  <section class="rn-cta-final">
+    <h2>Pronto para saber<br><em>se você tem um caso?</em></h2>
+    <p>
+      Avaliação gratuita pelo WhatsApp. Fale com um advogado em até 1 hora —
+      sem burocracia, sem compromisso.
+    </p>
+
+    <a href="https://wa.me/SEUNUMERO?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20uma%20avalia%C3%A7%C3%A3o%20gratuita%20sobre%20meu%20caso%20de%20direito%20do%20consumidor."
+       class="rn-btn-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.849L.057 23.571c-.072.267.169.511.437.437l5.801-1.484A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.825 9.825 0 01-5.001-1.365l-.357-.213-3.712.95.98-3.626-.233-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+      </svg>
+      Avaliar meu caso gratuitamente
+    </a>
+
+    <p class="rn-cta-note">📲 Resposta em até 1 hora &nbsp;·&nbsp; Confidencial &nbsp;·&nbsp; Sem compromisso</p>
+  </section>
+
+</div><!-- /rn-lp -->
+
+<!-- =======================================
+     FAQ SCHEMA — SEO (não visível ao usuário)
+     Deixe este bloco na página — ele ajuda o Google
+     a exibir as perguntas diretamente na busca.
+======================================= -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Preciso ir pessoalmente ao escritório de advocacia para atendimento?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Não. Todo o atendimento é feito de forma 100% remota. Você envia os documentos digitalmente, acompanha o caso online e não precisa comparecer presencialmente. Atendemos clientes em todo o Brasil."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "A avaliação inicial de direito do consumidor é gratuita?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim. Você nos conta o que aconteceu pelo WhatsApp sem nenhum custo. Analisamos a situação, explicamos seus direitos e indicamos o melhor caminho. Só há honorários se você decidir nos contratar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto tempo leva para resolver um caso de direito do consumidor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depende do tipo de caso. Muitas situações são resolvidas por acordos extrajudiciais em poucas semanas. Casos judiciais têm prazo mais variável, mas mantemos o cliente informado em cada etapa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O escritório atende em qual estado?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Atendemos em todo o território nacional. Nossa sede fica em São José dos Campos (SP), mas como o atendimento é 100% online, não há restrição de localidade para a maioria dos casos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vocês atuam contra grandes empresas como bancos e planos de saúde?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim. Temos experiência em casos contra bancos, operadoras de plano de saúde, companhias aéreas, construtoras e grandes varejistas. O porte da empresa não limita seus direitos como consumidor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Preciso ter todos os documentos antes de entrar em contato com o advogado?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Não. Basta nos contar o que aconteceu. Orientamos quais documentos serão relevantes para o seu caso específico após a avaliação inicial gratuita."
+      }
+    }
+  ]
+}
+</script>
