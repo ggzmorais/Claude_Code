@@ -1,0 +1,2 @@
+requests>=2.31.0
+google-ads>=24.0.0
