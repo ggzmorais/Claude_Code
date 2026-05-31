@@ -1,0 +1,27 @@
+PLATAFORMA,ITEM,O QUE É,ONDE ENCONTRAR,VALOR COLETADO,STATUS,OBSERVAÇÕES
+,,,,,,
+=== SLACK ===,,,,,,
+Slack,SLACK_WEBHOOK_URL,URL para enviar mensagens ao canal,"api.slack.com/apps → Create App → Incoming Webhooks → Add Webhook → copiar URL",,⬜ Pendente,URL começa com https://hooks.slack.com/services/...
+,,,,,,
+=== META ADS ===,,,,,,
+Meta Ads,META_ACCESS_TOKEN,Token de acesso à API,"1) Acesse developers.facebook.com/tools/explorer  2) Login com conta Meta  3) Selecione ou crie um App  4) Adicione permissões: ads_read + ads_management  5) Clique Generate Access Token",,⬜ Pendente,Token longo começa com EAA...
+Meta Ads,META_AD_ACCOUNT_IDS,ID da conta de anúncios,"Gerenciador de Anúncios (business.facebook.com/adsmanager) → URL da página contém act_XXXXXXXXXX → copiar só os números",,⬜ Pendente,"Só números, sem act_. Ex: 1234567890"
+,,,,,,
+=== GOOGLE ADS ===,,,,,,
+Google Ads,GOOGLE_ADS_CUSTOMER_IDS,ID do cliente Google Ads,"Acesse ads.google.com → número no canto superior direito no formato XXX-XXX-XXXX",,⬜ Pendente,"Ex: 123-456-7890. Se tiver MCC, usar ID da conta filha"
+Google Ads,GOOGLE_ADS_DEVELOPER_TOKEN,Token de desenvolvedor,"Google Ads → Ferramentas → API Center → copiar Developer Token",,⬜ Pendente,Pode estar em status TEST até aprovar acesso
+Google Ads,GOOGLE_ADS_CLIENT_ID,ID do cliente OAuth,"console.cloud.google.com → Credenciais → Criar credencial OAuth 2.0 → copiar Client ID",,⬜ Pendente,Termina com .apps.googleusercontent.com
+Google Ads,GOOGLE_ADS_CLIENT_SECRET,Senha do cliente OAuth,Mesmo lugar do Client ID → copiar Client Secret,,⬜ Pendente,Sequência de letras e números
+Google Ads,GOOGLE_ADS_REFRESH_TOKEN,Token de atualização OAuth,"Usar OAuth Playground (developers.google.com/oauthplayground) com escopo: https://www.googleapis.com/auth/adwords",,⬜ Pendente,Começa com 1//
+Google Ads,GOOGLE_ADS_LOGIN_CUSTOMER_ID,ID da conta MCC (se tiver),"Só necessário se usar conta gerenciadora (MCC). Mesmo lugar do Customer ID, mas da conta pai",,⬜ Pendente,Deixar vazio se não tiver MCC
+,,,,,,
+=== LINKEDIN ADS ===,,,,,,
+LinkedIn Ads,LINKEDIN_AD_ACCOUNT_IDS,ID da conta de anúncios,"linkedin.com/campaignmanager → URL contém /accounts/XXXXXXXXX → copiar os números",,⬜ Pendente,"Ex: 510123456"
+LinkedIn Ads,LINKEDIN_ACCESS_TOKEN,Token de acesso à API,"1) linkedin.com/developers/apps → Create App  2) Adicionar produto: Marketing Developer Platform  3) Aba Auth → gerar token com permissão r_ads_reporting",,⬜ Pendente,Token longo começa com AQX...
+,,,,,,
+=== GITHUB SECRETS ===,,,,,,
+GitHub,Acessar Settings do repositório,"Onde guardar todos os tokens com segurança","github.com/ggzmorais/Claude_Code → Settings → Secrets and variables → Actions → New repository secret",,⬜ Pendente,Cada linha acima vira um secret separado
+,,,,,,
+=== WORKFLOW ===,,,,,,
+GitHub Actions,Mover arquivo de workflow,O GitHub só lê workflows da pasta raiz,"Claude Code faz isso automaticamente — só avisar quando os secrets estiverem prontos",,⬜ Pendente,Não precisa fazer manualmente
+GitHub Actions,Testar o report,Rodar manualmente para validar,"github.com/ggzmorais/Claude_Code → aba Actions → Daily Ads Report → Run workflow",,⬜ Pendente,Fazer depois de configurar todos os secrets
