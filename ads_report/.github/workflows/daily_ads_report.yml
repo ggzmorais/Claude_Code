@@ -1,0 +1,66 @@
+name: Daily Ads Report
+
+on:
+  schedule:
+    # Roda todo dia às 08:00 horário de Brasília (11:00 UTC)
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+    inputs:
+      date_start:
+        description: "Data início (YYYY-MM-DD). Deixe vazio para usar ontem."
+        required: false
+      date_end:
+        description: "Data fim (YYYY-MM-DD). Deixe vazio para usar ontem."
+        required: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ads_report
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: ads_report/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Cria google-ads.yaml a partir dos secrets (se estiver usando a opção SDK)
+      - name: Write google-ads.yaml
+        if: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN != '' }}
+        run: |
+          cat > google-ads.yaml <<EOF
+          developer_token: "${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}"
+          client_id: "${{ secrets.GOOGLE_ADS_CLIENT_ID }}"
+          client_secret: "${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}"
+          refresh_token: "${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}"
+          login_customer_id: "${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}"
+          use_proto_plus: True
+          EOF
+
+      - name: Run report
+        env:
+          # Meta
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_AD_ACCOUNT_IDS: ${{ secrets.META_AD_ACCOUNT_IDS }}
+          # Google
+          GOOGLE_ADS_YAML_PATH: google-ads.yaml
+          GOOGLE_ADS_CUSTOMER_IDS: ${{ secrets.GOOGLE_ADS_CUSTOMER_IDS }}
+          # LinkedIn
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_AD_ACCOUNT_IDS: ${{ secrets.LINKEDIN_AD_ACCOUNT_IDS }}
+          # Slack
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          # Datas (manual dispatch)
+          REPORT_DATE_START: ${{ github.event.inputs.date_start }}
+          REPORT_DATE_END: ${{ github.event.inputs.date_end }}
+        run: python main.py
